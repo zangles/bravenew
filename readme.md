@@ -10,7 +10,7 @@ Instalation
 6. ``php artisan migrate --seed``
 7. ``php artisan key:generate``
 
-##Admin Panel credentials:
+## Admin Panel credentials:
 
 - user: admin@admin.com
 - password: admin
