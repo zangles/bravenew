@@ -1028,3 +1028,7 @@ section.comments {
     visibility: hidden;
   }
 }
+
+.distanceDropdown {
+  width: 250px !important;
+}

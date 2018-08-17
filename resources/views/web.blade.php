@@ -9,16 +9,21 @@
             <div class="col-md-10 col-md-offset-1">
                 <form action="{{ route('search') }}" method="post">
                     @csrf
-                    <label for="">Distance</label>
+                    <label for="">Search</label>
                     <div class="form-group">
-                        <select name="distance" id="distance" class="form-control">
-                            @foreach($distances as $distance)
-                                <option value="{{ $distance }}"
-                                        @if($selectedDistance == $distance) selected @endif>
-                                    @if($distance == 0) Anywhere @else {{ $distance }} {{ $metric }} @endif
-                                </option>
-                            @endforeach
-                        </select>
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search for..." value="{{ $search }}">
+                            <span class="input-group-btn">
+                                <select name="distance" id="distance" class="form-control distanceDropdown">
+                                @foreach($distances as $distance)
+                                        <option value="{{ $distance }}"
+                                                @if($selectedDistance == $distance) selected @endif>
+                                        @if($distance == 0) Anywhere @else {{ $distance }} {{ $metric }} @endif
+                                    </option>
+                                @endforeach
+                            </select>
+                            </span>
+                        </div>
                     </div>
                     <input type="hidden" id="latitude" name="latitude">
                     <input type="hidden" id="longitude" name="longitude">

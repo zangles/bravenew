@@ -16,9 +16,10 @@ class HomeController extends Controller
     public function index()
     {
         $selectedDistance = 0;
+        $search = "";
         $distances = Service::getDistances();
         $metric = Service::getMetric();
-        return view('web', compact('selectedDistance', 'distances', 'metric'));
+        return view('web', compact('selectedDistance', 'distances', 'search', 'metric'));
     }
 
     /**
@@ -31,6 +32,8 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $selectedDistance = $request->input('distance');
+        $search = $request->input('search');
+
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
 
@@ -40,11 +43,17 @@ class HomeController extends Controller
             $query = Service::distance($latitude, $longitude);
         }
 
+        if (!is_null($search)) {
+            $query->where('title', 'like', "%$search%");
+            $query->orWhere('description', 'like', "%$search%");
+        }
+
         $result = $query->orderBy('distance', 'ASC')->get();
 
         $distances = Service::getDistances();
         $metric = Service::getMetric();
-        return view('web', compact('result', 'selectedDistance', 'distances', 'metric'));
+
+        return view('web', compact('result', 'selectedDistance', 'distances', 'search', 'metric'));
     }
 
 }

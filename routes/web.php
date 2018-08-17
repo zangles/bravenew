@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('web');
 Route::post('/', 'HomeController@search')->name('search');
 
 Auth::routes();
